@@ -1,4 +1,4 @@
-import { User } from "../user";
+import { User } from "../models/user";
 import { getRepository } from "typeorm";
 const userRepository = getRepository(User);
 
