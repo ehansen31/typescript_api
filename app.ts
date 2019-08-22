@@ -10,7 +10,7 @@ server.get("/colections", (req, res) => {
     res.send("typescript api real deal");
 });
 
-server.get("/", (req, res) => {
+server.get("/", (req:express.Request, res) => {
     res.send("typescript api");
 });
 

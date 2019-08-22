@@ -9,6 +9,7 @@ tsc --watch
 
 
 #### TODO:
+* type-rest and type-rest-swagger
 * populate unit test database with data
 * auth token via middleware
 * response class with logging
