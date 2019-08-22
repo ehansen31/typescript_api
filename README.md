@@ -3,6 +3,11 @@ Work in progress
 ---
 Typescript API boilerplate for fast moving POC's that don't require immediate scalability. 
 ---
+
+###setup
+tsc --watch
+
+
 #### TODO:
 * populate unit test database with data
 * auth token via middleware

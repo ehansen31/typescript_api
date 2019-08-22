@@ -7,11 +7,11 @@ import { User } from "./models/user";
 let server = express();
 
 server.get("/colections", (req, res) => {
-    res.send("collections api real deal");
+    res.send("typescript api real deal");
 });
 
 server.get("/", (req, res) => {
-    res.send("collections api");
+    res.send("typescript api");
 });
 
 // server.post("collection/create", async (req, res) => { });
@@ -21,7 +21,7 @@ server.get("/", (req, res) => {
 // server.post("user/create", createUserRoute);
 // server.get("/user/create/", (req, res) => {
 //     console.log(`here`); 
-//     res.send("collections api");
+//     res.send("typescript api");
 // });
 // server.post("user/update", async (req, res) => { });
 
@@ -52,13 +52,6 @@ server.listen(8080, () => {
 
 // endpoints: create collection
 
-/*
-endpoints:
-create business entity
-create collection
-stop collection
-check collection
-*/
 
 // webhook status updates
 

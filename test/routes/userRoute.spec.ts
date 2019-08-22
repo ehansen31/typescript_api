@@ -17,19 +17,19 @@ describe('user route unit tests', () => {
     it('should return response on call', () => {
         return chai.request(app).get('/')
             .then(res => {
-                chai.expect(res.text).to.eql("collections api");
+                chai.expect(res.text).to.eql("typescript api");
             });
     });
     it('should return response on call 2', () => {
         return chai.request(app).get('/')
             .then(res => {
-                chai.expect(res.text).to.eql("collections api");
+                chai.expect(res.text).to.eql("typescript api");
             });
     });
-    it('should return response on call collections', () => {
+    it('should return response on call typescript api', () => {
         return chai.request(app).get('/colections')
             .then(res => {
-                chai.expect(res.text).to.eql("collections api real deal");
+                chai.expect(res.text).to.eql("typescript api real deal");
             });
     });
 });
