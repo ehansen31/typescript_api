@@ -2,32 +2,37 @@ import "reflect-metadata";
 import express = require("express");
 import { createConnection } from "typeorm";
 import { User } from "./models/user";
-// import { createUserRoute } from "./routes/userRoute"
+import { Server, Path, GET, PathParam } from "typescript-rest";
 
-let server = express();
+let server: express.Application = express();
 
-server.get("/colections", (req, res) => {
-    res.send("typescript api real deal");
-});
+@Path("/hello")
+class HelloService {
+    @Path(":name")
+    @GET
+    sayHello(@PathParam('name') name: string): string {
+        return "Hello " + name;
+    }
+}
 
-server.get("/", (req:express.Request, res) => {
-    res.send("typescript api");
-});
+@Path("/")
+class Default {
+    @GET
+    explain(): string {
+        return "typescript api"
+    }
+}
 
-// server.post("collection/create", async (req, res) => { });
-// server.patch("collection/update", async (req, res) => { });
-// server.delete("collection/stop", async (req, res) => { });
+@Path("/content")
+class ContentEndpoint {
+    @GET
+    explain(): string {
+        return "returning content"
+    }
+}
 
-// server.post("user/create", createUserRoute);
-// server.get("/user/create/", (req, res) => {
-//     console.log(`here`); 
-//     res.send("typescript api");
-// });
-// server.post("user/update", async (req, res) => { });
+Server.buildServices(server);
 
-// server.get("hello", (req, res) => {
-//     res.send("hello api");
-// });
 
 server.listen(8080, () => {
     console.log(`server started at http://localhost:${8080}`);

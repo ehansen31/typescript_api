@@ -27,9 +27,9 @@ describe('user route unit tests', () => {
             });
     });
     it('should return response on call typescript api', () => {
-        return chai.request(app).get('/colections')
+        return chai.request(app).get('/content')
             .then(res => {
-                chai.expect(res.text).to.eql("typescript api real deal");
+                chai.expect(res.text).to.eql("returning content");
             });
     });
 });

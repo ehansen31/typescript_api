@@ -23,6 +23,7 @@
     "sinon": "^7.4.1",
     "ts-node": "^8.2.0",
     "typeorm": "^0.2.18",
-    "typescript": "^3.5.1"
+    "typescript": "^3.5.1",
+    "typescript-rest": "^2.2.2"
   }
 }
