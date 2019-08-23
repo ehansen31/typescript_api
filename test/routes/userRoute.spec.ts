@@ -24,9 +24,12 @@ describe('user route unit tests', () => {
         user.firstName = "erik";
         user.id = 1;
         const userRepositoryMock = sinon.mock(repo);
-        userRepositoryMock.expects('save').withArgs(user).returns(Promise.resolve(user));
+        userRepositoryMock.expects('save').returns(Promise.resolve(user));
 
         return chai.request(app).post('/user')
+        .send({
+            name:"erik"
+        })
             .then(res => {
                 chai.expect(res.text).to.eql(user.id.toString());
             });

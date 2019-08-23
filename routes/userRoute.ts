@@ -16,10 +16,10 @@ export class UserRoute {
         await createConnection({
             type: "postgres",
             host: "localhost",
-            port: 3306,
-            username: "root",
-            password: "admin",
-            database: "production",
+            port: 5432,
+            username: "postgres",
+            password: "postgres",
+            database: "test",
             entities: [
                 User
             ],
@@ -31,8 +31,8 @@ export class UserRoute {
 
 
         let userObj: User = new User();
-        userObj.firstName = name;
-        await userRepository.save(userObj);
+        userObj.firstName = body_params.name;
+        userObj = await userRepository.save(userObj);
         return userObj.id.toString();
     }
 }
