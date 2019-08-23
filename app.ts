@@ -1,19 +1,9 @@
 import "reflect-metadata";
 import express = require("express");
 import { createConnection } from "typeorm";
-import { User } from "./models/user";
-import { Server, Path, GET, PathParam, PassportAuthenticator } from "typescript-rest";
-
+import { Server, Path, GET, PathParam, PassportAuthenticator, POST } from "typescript-rest";
+import {UserRoute} from "./routes/userRoute"
 let server: express.Application = express();
-
-@Path("/hello")
-class HelloService {
-    @Path(":name")
-    @GET
-    sayHello(@PathParam('name') name: string): string {
-        return "Hello " + name;
-    }
-}
 
 @Path("/")
 class Default {
@@ -23,18 +13,7 @@ class Default {
     }
 }
 
-@Path("/content")
-class ContentEndpoint {
-    @GET
-    explain(): string {
-        return "returning content"
-    }
-}
-
-// Server.registerAuthenticator(new PassportAuthenticator());
-
-Server.buildServices(server);
-
+Server.buildServices(server, UserRoute);
 
 server.listen(8080, () => {
     console.log(`server started at http://localhost:${8080}`);

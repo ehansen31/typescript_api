@@ -32,4 +32,11 @@ describe('user route unit tests', () => {
                 chai.expect(res.text).to.eql("returning content");
             });
     });
+
+    it('should create a user', () => {
+        return chai.request(app).post('/user')
+            .then(res => {
+                chai.expect(res.text).to.eql("returning content");
+            });
+    });
 });
