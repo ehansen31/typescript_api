@@ -1,18 +1,13 @@
 import app from "../../app"
 import { describe, it } from "mocha";
+import * as sinon from "sinon"
 import * as chai from "chai"
+import * as typeorm from "typeorm"
 import chaiHttp = require('chai-http');
 chai.use(chaiHttp);
+import { User } from "../../models/user"
 
 describe('user route unit tests', () => {
-    // it('should save a user to the db', (done) => {
-    //     return chai.request(app)
-    //         .get('/hello')
-    //         .then(res => {
-    //             chai.expect(res.text).to.eql("hello api");
-    //             done();
-    //         });
-    // });
 
     it('should return response on call', () => {
         return chai.request(app).get('/')
@@ -20,23 +15,20 @@ describe('user route unit tests', () => {
                 chai.expect(res.text).to.eql("typescript api");
             });
     });
-    it('should return response on call 2', () => {
-        return chai.request(app).get('/')
-            .then(res => {
-                chai.expect(res.text).to.eql("typescript api");
-            });
-    });
-    it('should return response on call typescript api', () => {
-        return chai.request(app).get('/content')
-            .then(res => {
-                chai.expect(res.text).to.eql("returning content");
-            });
-    });
 
     it('should create a user', () => {
+        let repo = new typeorm.Repository();
+        sinon.stub(typeorm, 'getRepository').returns(repo);
+
+        let user = new User();
+        user.firstName = "erik";
+        user.id = 1;
+        const userRepositoryMock = sinon.mock(repo);
+        userRepositoryMock.expects('save').withArgs(user).returns(Promise.resolve(user));
+
         return chai.request(app).post('/user')
             .then(res => {
-                chai.expect(res.text).to.eql("returning content");
+                chai.expect(res.text).to.eql(user.id.toString());
             });
     });
 });
