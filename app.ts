@@ -2,7 +2,7 @@ import "reflect-metadata";
 import express = require("express");
 import { createConnection } from "typeorm";
 import { User } from "./models/user";
-import { Server, Path, GET, PathParam } from "typescript-rest";
+import { Server, Path, GET, PathParam, PassportAuthenticator } from "typescript-rest";
 
 let server: express.Application = express();
 
@@ -31,6 +31,8 @@ class ContentEndpoint {
     }
 }
 
+// Server.registerAuthenticator(new PassportAuthenticator());
+
 Server.buildServices(server);
 
 
@@ -55,9 +57,5 @@ server.listen(8080, () => {
 //     // here you can start to work with your entities
 // }).catch(error => console.log(error));
 
-// endpoints: create collection
-
-
-// webhook status updates
 
 export default server;
