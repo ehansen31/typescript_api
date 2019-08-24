@@ -13,19 +13,6 @@ export class UserRoute {
      */
     @POST
     public async sayHello(body_params: { name: string }): Promise<string> {
-        await createConnection({
-            type: "postgres",
-            host: "localhost",
-            port: 5432,
-            username: "postgres",
-            password: "postgres",
-            database: "test",
-            entities: [
-                User
-            ],
-            synchronize: true,
-            logging: false
-        })
 
         const userRepository = getRepository(User);
 

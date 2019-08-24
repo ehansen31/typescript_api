@@ -17,26 +17,23 @@ class Default {
 Server.buildServices(server, UserRoute);
 
 // configure test and production environments
+createConnection({
+    type: "postgres",
+    host: "localhost",
+    port: 5432,
+    username: "postgres",
+    password: "postgres",
+    database: "test",
+    entities: [
+        User
+    ],
+    synchronize: true,
+    logging: false
+})
 
-(async () => {
-    await createConnection({
-        type: "postgres",
-        host: "localhost",
-        port: 3306,
-        username: "root",
-        password: "admin",
-        database: "production",
-        entities: [
-            User
-        ],
-        synchronize: true,
-        logging: false
-    })
-
-    server.listen(8080, () => {
-        console.log(`server started at http://localhost:${8080}`);
-    });
-})()
+server.listen(8080, () => {
+    console.log(`server started at http://localhost:${8080}`);
+});
 
 
 

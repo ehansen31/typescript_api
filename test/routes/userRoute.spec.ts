@@ -1,19 +1,28 @@
 import app from "../../app"
-import { describe, it } from "mocha";
+import { before, describe, it } from "mocha";
 import * as sinon from "sinon"
 import * as chai from "chai"
 import * as typeorm from "typeorm"
 import chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 import { User } from "../../models/user"
+import { createConnection } from "typeorm";
 
 describe('user route unit tests', () => {
-
-    it('should return response on call', () => {
-        return chai.request(app).get('/')
-            .then(res => {
-                chai.expect(res.text).to.eql("typescript api");
-            });
+    before(async () => {
+        await createConnection({
+            type: "postgres",
+            host: "localhost",
+            port: 5432,
+            username: "postgres",
+            password: "postgres",
+            database: "test",
+            entities: [
+                User
+            ],
+            synchronize: true,
+            logging: false
+        })
     });
 
     it('should create a user', () => {
@@ -27,9 +36,9 @@ describe('user route unit tests', () => {
         userRepositoryMock.expects('save').returns(Promise.resolve(user));
 
         return chai.request(app).post('/user')
-        .send({
-            name:"erik"
-        })
+            .send({
+                name: "erik"
+            })
             .then(res => {
                 chai.expect(res.text).to.eql(user.id.toString());
             });
