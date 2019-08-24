@@ -9,21 +9,6 @@ import { User } from "../../models/user"
 import { createConnection } from "typeorm";
 
 describe('user route unit tests', () => {
-    before(async () => {
-        await createConnection({
-            type: "postgres",
-            host: "localhost",
-            port: 5432,
-            username: "postgres",
-            password: "postgres",
-            database: "test",
-            entities: [
-                User
-            ],
-            synchronize: true,
-            logging: false
-        })
-    });
 
     it('should create a user', () => {
         let repo = new typeorm.Repository();

@@ -1,7 +1,6 @@
 import { GET, Path, PathParam, POST } from 'typescript-rest';
-import { User } from "../models/user";
-import { getRepository,createConnection } from "typeorm";
-
+import { User } from "../models/user"
+import { userService } from "../service/userService"
 /**
  * This is a demo operation to show how to use typescript-rest library.
  */
@@ -12,14 +11,10 @@ export class UserRoute {
      * @param name The name that will receive our greeting message
      */
     @POST
-    public async sayHello(body_params: { name: string }): Promise<string> {
-
-        const userRepository = getRepository(User);
-
-
-        let userObj: User = new User();
+    public async createUser(body_params: { name: string }): Promise<User> {
+        let userObj = new User();
         userObj.firstName = body_params.name;
-        userObj = await userRepository.save(userObj);
-        return userObj.id.toString();
+        let returnObj: User = await userService.CreateUser(userObj)
+        return;
     }
 }
