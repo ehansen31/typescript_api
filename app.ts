@@ -14,7 +14,7 @@ class Default {
     }
 }
 
-Server.buildServices(server, UserRoute);
+Server.buildServices(server, Default, UserRoute, );
 
 // configure test and production environments
 createConnection({

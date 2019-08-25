@@ -15,6 +15,6 @@ export class UserRoute {
         let userObj = new User();
         userObj.firstName = body_params.name;
         let returnObj: User = await userService.CreateUser(userObj)
-        return;
+        return returnObj;
     }
 }

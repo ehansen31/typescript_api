@@ -6,26 +6,25 @@ import * as typeorm from "typeorm"
 import chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 import { User } from "../../models/user"
-import { createConnection } from "typeorm";
+import {userService} from "../../service/userService"
 
 describe('user route unit tests', () => {
 
     it('should create a user', () => {
-        let repo = new typeorm.Repository();
-        sinon.stub(typeorm, 'getRepository').returns(repo);
+        let userObj = new User();
+        userObj.id = 1;
+        userObj.firstName='erik';
 
-        let user = new User();
-        user.firstName = "erik";
-        user.id = 1;
-        const userRepositoryMock = sinon.mock(repo);
-        userRepositoryMock.expects('save').returns(Promise.resolve(user));
+        let userServiceMock = sinon.mock(userService);
+        userServiceMock.expects('CreateUser').returns(userObj)
 
         return chai.request(app).post('/user')
             .send({
                 name: "erik"
             })
             .then(res => {
-                chai.expect(res.text).to.eql(user.id.toString());
+                chai.expect(res.body.fire
+                    ).to.eql(userObj.id.toString());
             });
     });
 });
