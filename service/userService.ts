@@ -1,7 +1,7 @@
 import { User } from "../models/user";
 import { getRepository } from "typeorm";
 
-export class userService {
+export class UserService {
     constructor() { }
 
     static async CreateUser(userObj: User): Promise<User> {

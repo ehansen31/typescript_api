@@ -6,16 +6,16 @@ import * as typeorm from "typeorm"
 import chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 import { User } from "../../models/user"
-import {userService} from "../../service/userService"
+import { UserService } from "../../service/userService"
 
 describe('user route unit tests', () => {
 
     it('should create a user', () => {
         let userObj = new User();
         userObj.id = 1;
-        userObj.firstName='erik';
+        userObj.firstName = 'erik';
 
-        let userServiceMock = sinon.mock(userService);
+        let userServiceMock = sinon.mock(UserService);
         userServiceMock.expects('CreateUser').returns(userObj)
 
         return chai.request(app).post('/user')
@@ -23,8 +23,7 @@ describe('user route unit tests', () => {
                 name: "erik"
             })
             .then(res => {
-                chai.expect(res.body.fire
-                    ).to.eql(userObj.id.toString());
+                chai.expect(res.body.firstName).to.eql(userObj.firstName);
             });
     });
 });

@@ -1,6 +1,6 @@
 import { GET, Path, PathParam, POST } from 'typescript-rest';
 import { User } from "../models/user"
-import { userService } from "../service/userService"
+import { UserService } from "../service/userService"
 /**
  * This is a demo operation to show how to use typescript-rest library.
  */
@@ -14,7 +14,7 @@ export class UserRoute {
     public async createUser(body_params: { name: string }): Promise<User> {
         let userObj = new User();
         userObj.firstName = body_params.name;
-        let returnObj: User = await userService.CreateUser(userObj)
+        let returnObj: User = await UserService.CreateUser(userObj)
         return returnObj;
     }
 }
