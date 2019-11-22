@@ -2,26 +2,13 @@ import { before, describe, it } from "mocha";
 import * as sinon from "sinon"
 import * as typeorm from "typeorm"
 import { User } from "../../models/user"
+import { Content } from "../../models/content"
 import { createConnection } from "typeorm";
 import { userService } from "../../service/userService"
 import assert = require("assert")
 
-describe(' unit tests', () => {
-    before(async () => {
-        await createConnection({
-            type: "postgres",
-            host: "localhost",
-            port: 5432,
-            username: "postgres",
-            password: "postgres",
-            database: "test",
-            entities: [
-                User
-            ],
-            synchronize: true,
-            logging: false
-        })
-    });
+describe('user service unit tests', () => {
+    before(async () => {});
 
     it('should save a user', async () => {
         let repo = new typeorm.Repository();
@@ -34,5 +21,20 @@ describe(' unit tests', () => {
         let user_response = await userService.CreateUser(user);
         assert(user_response.id == 1, "user id not set properly");
         assert(user_response.firstName == "erik", "user name not set properly");
+        sinon.restore()
+    });
+
+    it('should get a user', async () => {
+        let repo = new typeorm.Repository();
+        sinon.stub(typeorm, 'getRepository').returns(repo);
+        let user = new User();
+        user.firstName = "erik";
+        user.id = 1;
+        const userRepositoryMock = sinon.mock(repo);
+        userRepositoryMock.expects('findOne').returns(Promise.resolve(user));
+        let user_response = await userService.GetUser(1);
+        assert(user_response.id == 1, "user id not returned properly");
+        assert(user_response.firstName == "erik", "user name not returned properly");
+        sinon.restore()
     });
 });

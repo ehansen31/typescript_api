@@ -10,7 +10,10 @@ swaggerGen -c ./swaggerConfig.json
 
 
 #### TODO:
-* populate unit test database with data
+* populate unit test database with data (https://github.com/RobinCK/typeorm-fixtures)
 * auth token via middleware, @security header in typerscript-rest
 * response class with logging
 * user and content creation through orm
+* rabbitmq
+* redis
+* logging

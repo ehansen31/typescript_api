@@ -6,8 +6,8 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    // @OneToMany(type => Content, content => content.user)
-    // content: Content[];
+    @OneToMany(type => Content, content => content.user)
+    content: Content[];
 
     @Column()
     email: string;

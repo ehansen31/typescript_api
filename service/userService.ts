@@ -12,4 +12,13 @@ export class userService {
             throw error
         }
     }
+
+    static async GetUser(id:number):Promise<User>{
+        let userRepository = getRepository(User);
+        try {
+            return userRepository.findOne(id);
+        } catch (error) {
+            throw error
+        }
+    }
 }

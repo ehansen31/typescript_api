@@ -1,0 +1,6 @@
+entity: User
+items:
+  user1:
+    email: erik@erik.com
+    firstName: erik
+    lastName: hansen

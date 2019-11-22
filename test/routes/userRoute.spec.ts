@@ -10,21 +10,21 @@ import {userService} from "../../service/userService"
 
 describe('user route unit tests', () => {
 
-    it('should create a user', () => {
-        let userObj = new User();
-        userObj.id = 1;
-        userObj.firstName='erik';
+    // it('should create a user', () => {
+    //     let userObj = new User();
+    //     userObj.id = 1;
+    //     userObj.firstName='erik';
 
-        let userServiceMock = sinon.mock(userService);
-        userServiceMock.expects('CreateUser').returns(userObj)
+    //     let userServiceMock = sinon.mock(userService);
+    //     userServiceMock.expects('CreateUser').returns(userObj)
 
-        return chai.request(app).post('/user')
-            .send({
-                name: "erik"
-            })
-            .then(res => {
-                chai.expect(res.body.fire
-                    ).to.eql(userObj.id.toString());
-            });
-    });
+    //     return chai.request(app).post('/user')
+    //         .send({
+    //             name: "erik"
+    //         })
+    //         .then(res => {
+    //             chai.expect(res.body.fire
+    //                 ).to.eql(userObj.id.toString());
+    //         });
+    // });
 });

@@ -4,6 +4,7 @@ import { createConnection } from "typeorm";
 import { Server, Path, GET, PathParam, PassportAuthenticator, POST } from "typescript-rest";
 import { UserRoute } from "./routes/userRoute"
 import { User } from "./models/user"
+import { Content } from "./models/content"
 let server: express.Application = express();
 
 @Path("/")
@@ -21,11 +22,12 @@ createConnection({
     type: "postgres",
     host: "localhost",
     port: 5432,
-    username: "postgres",
-    password: "postgres",
-    database: "test",
+    username: "user",
+    password: "pass",
+    database: "typescript_api",
     entities: [
-        User
+        User,
+        Content
     ],
     synchronize: true,
     logging: false
